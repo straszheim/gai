@@ -8,7 +8,7 @@
   "activationCommands": {
     "atom-workspace": "gai:toggle"
   },
-  "repository": "https://github.com/atom/gai",
+  "repository": "git+https://github.com/straszheim/gai.git",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"

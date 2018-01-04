@@ -3,15 +3,18 @@ GaiView = require './gai-view'
 
 module.exports = Gai =
   gaiView: null
-  modalPanel: null
+  editor: null
   subscriptions: null
 
   activate: (state) ->
-    @gaiView = new GaiView(state.gaiViewState)
-    @modalPanel = atom.workspace.addModalPanel(item: @gaiView.getElement(), visible: false)
 
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
+    opener = atom.workspace.addOpener (uri) =>
+      if uri === 'atom://gai'
+        return new GaiView
+
     @subscriptions = new CompositeDisposable
+
 
     # Register command that toggles this view
     @subscriptions.add atom.commands.add 'atom-workspace', 'gai:toggle': => @toggle()
@@ -25,9 +28,23 @@ module.exports = Gai =
     gaiViewState: @gaiView.serialize()
 
   toggle: ->
-    console.log 'Gai was toggled!'
+    atom.workspace.toggle 'atom://gai'
 
-    if @modalPanel.isVisible()
-      @modalPanel.hide()
-    else
-      @modalPanel.show()
+
+get_buffer_for = (path) ->
+  eds = atom.workspace.getTextEditors()
+  console.log eds
+  for e in eds
+    console.log e.buffer.file.path
+    if e.buffer.file.path == path
+      return e.buffer
+
+
+
+hackit = () ->
+  b = get_buffer_for('/home/troy/proj/atom/repos/gai/something.gai')
+  console.log b
+  for id, ml of b.markerLayers
+    console.log id, ml
+
+hackit()

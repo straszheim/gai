@@ -1,0 +1,44 @@
+project1 =
+  desc: "we're doing this thing"
+  gets: [
+    "something" : "hdwe"
+    "otherthing" : "grocery"
+  ]
+  tasks: [
+    "get your smoove on"
+    "and on and on"
+  ]
+
+project2 =
+  desc: "we're doing this other thing"
+  gets: [
+    "something" : "hdwe"
+    "otherthing" : "grocery"
+  ]
+  tasks: [
+    "get your smoove on"
+    "and on and on"
+  ]
+  depends: project1
+
+
+project3 =
+  desc: "third thing"
+  gets: [
+
+  ]
+  tasks: [
+
+  ]
+  depends: project1
+
+
+project4 =
+  desc: "fourth thing"
+  gets: [
+
+  ]
+  tasks: [
+
+  ]
+  depends: [project2, project3]
